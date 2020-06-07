@@ -16,6 +16,7 @@
 
 package com.mellobit.spop
 
+import com.mellobit.spop.di.SchedulerProvider
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton

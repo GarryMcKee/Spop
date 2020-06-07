@@ -1,4 +1,4 @@
-package com.mellobit.spop
+package com.mellobit.spop.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.mellobit.spop.Injectable
 import com.mellobit.spop.databinding.FragmentRecommendationBinding
 import javax.inject.Inject
 
@@ -20,6 +22,7 @@ class RecommendationFragment : Fragment(), Injectable {
     lateinit var binding: FragmentRecommendationBinding
 
     val recommendationViewModel: RecommendationViewModel by viewModels { viewModelFactory }
+    val adapter = TrackListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,16 +30,19 @@ class RecommendationFragment : Fragment(), Injectable {
     ): View? {
 
         binding = FragmentRecommendationBinding.inflate(inflater)
+        binding.tracklist.layoutManager = LinearLayoutManager(requireContext())
+        binding.tracklist.adapter = adapter
 
-        recommendationViewModel.messageLiveData.observe(viewLifecycleOwner, Observer {
-            binding.welcomeMessage.text = it
+        recommendationViewModel.trackList.observe(viewLifecycleOwner, Observer {
+            adapter.tracks = it
+            adapter.notifyDataSetChanged()
         })
 
         recommendationViewModel.errorLiveData.observe(viewLifecycleOwner, Observer {
             Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
         })
 
-        recommendationViewModel.getMessage()
+        recommendationViewModel.getTracks()
 
         return binding.root
     }

@@ -16,6 +16,7 @@
 
 package com.mellobit.spop
 
+import com.mellobit.spop.ui.RecommendationFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 

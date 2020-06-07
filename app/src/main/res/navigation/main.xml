@@ -18,6 +18,6 @@
     app:startDestination="@id/recommendationFragment">
     <fragment
         android:id="@+id/recommendationFragment"
-        android:name="com.mellobit.spop.RecommendationFragment"
+        android:name="com.mellobit.spop.ui.RecommendationFragment"
         android:label="Spop" />
 </navigation>

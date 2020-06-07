@@ -1,4 +1,4 @@
-package com.mellobit.spop
+package com.mellobit.spop.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

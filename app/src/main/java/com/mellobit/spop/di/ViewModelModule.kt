@@ -18,6 +18,8 @@ package com.mellobit.spop
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.mellobit.spop.di.SpopViewModelFactory
+import com.mellobit.spop.ui.RecommendationViewModel
 
 import dagger.Binds
 import dagger.Module

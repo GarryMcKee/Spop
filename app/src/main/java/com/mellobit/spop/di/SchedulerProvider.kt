@@ -1,4 +1,4 @@
-package com.mellobit.spop
+package com.mellobit.spop.di
 
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
