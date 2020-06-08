@@ -35,5 +35,10 @@ abstract class ViewModelModule {
     abstract fun bindRecommendationViewModel(recommendationViewModel: RecommendationViewModel): ViewModel
 
     @Binds
+    @IntoMap
+    @ViewModelKey(AuthenticationViewModel::class)
+    abstract fun bindAuthenticationViewModel(authenticationViewModel: AuthenticationViewModel): ViewModel
+
+    @Binds
     abstract fun bindViewModelFactory(factory: SpopViewModelFactory): ViewModelProvider.Factory
 }

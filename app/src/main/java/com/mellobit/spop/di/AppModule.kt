@@ -16,38 +16,54 @@
 
 package com.mellobit.spop
 
+import android.app.Application
+import android.content.Context
+import android.content.SharedPreferences
+import com.mellobit.spop.di.RepositoryModule
 import com.mellobit.spop.di.SchedulerProvider
 import dagger.Module
 import dagger.Provides
+import retrofit2.Retrofit
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 
-@Module(includes = [ViewModelModule::class])
+@Module(includes = [ViewModelModule::class, RepositoryModule::class])
 class AppModule {
-//    @Singleton
-//    @Provides
-    //TODO should provide Spotify Service
-//    fun provideGithubService(): GithubService {
-//        return Retrofit.Builder()
-//            .baseUrl("https://api.github.com/")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .addCallAdapterFactory(LiveDataCallAdapterFactory())
-//            .build()
-//            .create(GithubService::class.java)
-//    }
 
-    //TODO Provide Spop Database
-//    @Singleton
-//    @Provides
-//    fun provideDb(app: Application): GithubDb {
-//        return Room
-//            .databaseBuilder(app, GithubDb::class.java, "github.db")
-//            .fallbackToDestructiveMigration()
-//            .build()
-//    }
+    @Singleton
+    @Provides
+    fun provideSpotifyService(): SpotifyService {
+        return Retrofit.Builder()
+            .baseUrl("https://api.github.com/")
+            .addConverterFactory(MoshiConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .build()
+            .create(SpotifyService::class.java)
+    }
 
     @Singleton
     @Provides
     fun provideSchedulerProvider(): SchedulerProvider {
         return SchedulerProvider()
+    }
+
+    @Provides
+    internal fun provideApplication(spopApp: Application): SpopApp {
+        return spopApp as SpopApp
+    }
+
+    @Provides
+    internal fun provideApplicationContext(spopApp: SpopApp): Context {
+        return spopApp.applicationContext
+    }
+
+    @Provides
+    internal fun provideSharedPreferences(context: Context): SharedPreferences {
+        return context.getSharedPreferences(PREF_FILE_KEY, Context.MODE_PRIVATE)
+    }
+
+    companion object {
+        const val PREF_FILE_KEY = "spopPrefKey"
     }
 }

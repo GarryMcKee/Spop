@@ -56,11 +56,15 @@ dependencies {
     implementation deps.lifecycle.runtime
     implementation deps.lifecycle.java8
     implementation deps.retrofit.runtime
-    implementation deps.retrofit.gson
+    implementation deps.retrofit.rxjava
+
     implementation deps.rxjava2
     implementation deps.rx_android
+    implementation deps.spotifyAuth
     implementation deps.glide.runtime
-
+    implementation deps.gson
+    implementation deps.moshi
+    implementation deps.moshi_retrofit_adapter
     implementation deps.dagger.runtime
     implementation deps.dagger.android
     implementation deps.dagger.android_support
@@ -97,4 +101,6 @@ dependencies {
     androidTestImplementation deps.arch_core.testing
     androidTestImplementation deps.mockito.core
     androidTestImplementation deps.mockito.android
+
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 }
