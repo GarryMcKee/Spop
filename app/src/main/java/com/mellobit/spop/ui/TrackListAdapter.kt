@@ -1,8 +1,10 @@
 package com.mellobit.spop.ui
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mellobit.spop.databinding.TrackListItemBinding
 
 class TrackListAdapter : RecyclerView.Adapter<TrackViewHolder>() {
@@ -34,5 +36,9 @@ class TrackViewHolder(private val binding: TrackListItemBinding) :
         this.track = track
         binding.artistNameLabel.text = track.artist
         binding.trackNameLabel.text = track.name
+
+        Glide.with(binding.coverArtImageView)
+            .load(Uri.parse(track.imgUrl))
+            .into(binding.coverArtImageView)
     }
 }
